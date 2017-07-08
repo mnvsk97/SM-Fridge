@@ -2,12 +2,12 @@
 Sai krishna M.N.V
 Raviteja R.
 
-Problem : Image classification and Detection. 
-Introduction : Initially, we started out to solve the classification problem. We tried to classify images using features like colour,shape,texture etc. The results obtained after implementing  various image processing algorithms were not consistent. And moreover the features we used to distinguish objects in a given image were not reliable. The main problem with the usage of conventional image processing techniques was that the number of features might vary and features used for classification might extract vary. After going through some research papers on image classification and tech articles, we came to know of the usage of neural networks in classifying images. We made use of a neural network framework called tensor flow, an open source project by google. Keeping in mind the huge community support available, tensor flow seemed to be the right platform to build out program. Tensor Flow's python API is powerful and easy to understand. We followed the official documentation and built an image classifier. To get started with tensor flow, tutorials are available at https://www.tensorflow.org/tutorials/  . Out of all the neural network architectures, Convolutional neural networks (CNNs for short) proved to be the best in industry when it comes to classification problems. To know more about how convolutional neural networks work, we have added some links in the end. A decent understanding of CNNs is necessary to proceed any further. Alex Krizhevsky was the first person to make use of CNNs in an image classification competition. He achieved ground-breaking results by using CNNs. Refer http://www.image-net.org/challenges/LSVRC/2017/index.php for more details about the above mentioned competition. We made use of Inception v3 model, a pre-trained model made open-source by google. This layer has been trained on about 1000 classes of images available at www.image-net.org/. Images required for training can be downloaded from this website. After training the inception model with our own set of images, the classifier seemed to give decent results.
+# Problem : Image classification and Detection. 
+ Initially, when we started out to solve the classification problem, we tried to classify images using features like colour,shape,texture etc. The results obtained after implementing  various image processing algorithms were not consistent. And moreover the features we used to distinguish objects in a given image were not reliable. The main problem with the usage of conventional image processing techniques was that the number of features might vary and features used for classification might extract vary. After going through some research papers on image classification and tech articles, we came to know of the usage of neural networks in classifying images. We made use of a neural network framework called tensor flow, an open source project by google. Keeping in mind the huge community support available, tensor flow seemed to be the right platform to build out program. Tensor Flow's python API is powerful and easy to understand. We followed the official documentation and built an image classifier. To get started with tensor flow, tutorials are available at https://www.tensorflow.org/tutorials/  . Out of all the neural network architectures, Convolutional neural networks (CNNs for short) proved to be the best in industry when it comes to classification problems. To know more about how convolutional neural networks work, we have added some links in the end. A decent understanding of CNNs is necessary to proceed any further. Alex Krizhevsky was the first person to make use of CNNs in an image classification competition. He achieved ground-breaking results by using CNNs. Refer http://www.image-net.org/challenges/LSVRC/2017/index.php for more details about the above mentioned competition. We made use of Inception v3 model, a pre-trained model made open-source by google. This layer has been trained on about 1000 classes of images available at www.image-net.org/. Images required for training can be downloaded from this website. After training the inception model with our own set of images, the classifier seemed to give decent results.
  
 We will walk you through the installation and training process in the below sections. We assume that you are using a linux distribution.
- 
-Clone this repository : 
+## Installation :
+<br>Clone this repository : </br>
 ```
 $ git clone https://github.com/mnvsk97/SM-fridge.git
 ```
@@ -22,15 +22,15 @@ Note: We assume that pip is already installed. If the local machine has external
 
 Some of the python scripts in the repository make use of OpenCV to read and write images as numpy arrays. Follow the installation tutorial from http://www.pyimagesearch.com/2015/06/22/install-opencv-3-0-and-python-2-7-on-ubuntu/.
  
-Training a pre-trained model on custom dataset :
-In tensor flow's official documentation, a brief explanation of how to train a pretrained model with our own dataset. Follow the instructions from https://www.tensorflow.org/tutorials/image_retraining. If there is any kind of problem when you follow the instructions, we will walk you through the training process in the following section. The next section can be skipped otherwise.The following sections assume that python is already installed in your computer.
+### Training a pre-trained model on custom dataset :
+In tensorflow's official documentation, a brief explanation of how to train a pretrained model with our own dataset. Follow the instructions from https://www.tensorflow.org/tutorials/image_retraining. If there is any kind of problem when you follow the instructions, we will walk you through the training process in the following section. The next section can be skipped otherwise.The following sections assume that python is already installed in your computer.
  
-1.Start by cloning tensor flow repository by running the following command :
+1. Start by cloning tensor flow repository by running the following command :
 ```
 $ git clone https://github.com/tensorflow/models
 ```
-This is the official tensor flow repository. Many pre-trained models are available here. We will proceed with Inception V3 model.
-2.The repository we just cloned has a python script which downloads a pretrained model which we use to train on our own data. The python script also downloads an example image and classifies it. Execute the following commands to run this script.
+This is the official tensorflow repository. Many pre-trained models are available here. We will proceed with Inception V3 model.
+2. The repository we just cloned has a python script which downloads a pretrained model which we use to train on our own data. The python script also downloads an example image and classifies it. Execute the following commands to run this script.
 ```
 $ cd models/tutorials/image/imagenet
 $ python classify_image.py
@@ -108,7 +108,7 @@ replace --image= with your test image path.
 The above commands build the labe_image.py script and display the predictions made on the input image. The format of outputs has already been discussed in step 2.
  
 We trained our model with four classes : carrot,brinjal,tomato,potato. When the model makes a prediction, the output will be any of the four classes with different confidence scores. The higher the confidence, higher is the reliability factor. Training accuracy and validation accuracy can be found during the training process. By analysing these accuracy values, one can get an idea of how well the training is being done. Accuracy depends on the different factors like architecture of CNN, number of layers, number of neurons in a layer and the quality of data.    
-### Drawbacks of this classifier:
+## Additional notes on this classifier:
 In the above sections, we trained a pretrained inception v3 model with our own dataset. Our classifier is very reliable when it comes to single class detection. If we want the algorithm to tell us about all the objects present in a given image, it may fail. 
 So its safe to say that the above implemented classifier is useful only when we want it to recognize a single object. Therefore what we have done is a single-label classifier. In a fridge there might be many objects arranged in different ways. Using this model for detection leads to the model unable to identify other objects. We need the classifier to locate all the objects in a given image. One approach to achieve multiple object detection is discussed below.
 The training data has two types of files. One type is the images with which we train our model and the other tye of files is the annotations i.e.,what does the image represent. For example, if there is an image named tomato.jpg , there exists a tomato.jpg.txt file with tomato written in it. This text file is the annotation of tomato.jpg . Instead of taking images which contain only tomatoes, we can collect images with other objects as well and annotate the text files with multiple classes. For example, image with potato and tomato has a corresponding text file with both classes in it. This way we can achieve multiple label classification. Read https://medium.com/towards-data-science/multi-label-image-classification-with-inception-net-cbb2ee538e30 to know more about this approach.This method works well enough but the only problem is the collection of images with multiple objects. You can try the approach mentioned in the above blog.
@@ -195,13 +195,18 @@ Manipulations :
 When we run the detect function, it creates a predictions.png file with bounding boxes drawn on the detected objects. The coordinates of these bounding boxes can be found by manipulating a file called image.c in ‘src’ folder. This file is a c program which is responsible for drawing bounding boxes around the detected objects. A modified image.c file is available in the following link:http://bit.ly/2uNZEAm . Download this file and  to ‘src’ folder in darknet directory. Replace the original image.c file with the downloaded file. Come back to darknet directory and open terminal and run ‘make’ command to compile yolo with the new changes made. After this modification, whenever you run the detect function, a new file called box_cord.txt is created containing bounding box coordinates drawn in predictions.jpg image. These coordinates are used in later stages.
 Before going any further, we need to know the classes with which we trained YOLO. For example, when we train YOLO with VOC data, YOLO has the capability to detect the objects from among these classes only. Objects that are not present in these classes are ignored in most of the cases. This is discussed in the end of this documentation
 The coordinates of the bounding boxes are used to crop the objects inside the boxes and run our tensor flow classifier on these images. To crop the images, use crop.py program and adjust the following lines as directed:
+```
 line 2 : path to box_cord.txt file
 line 4 : path to our original test image on which you ran the detect program.
 Line 12: path to the folder where you want to save the cropped images
+```
 After running this script, cropped images are saved in a folder of your choice. Now we need to run our classifier on these images. Note that the .pb file and .txt file are now used to make predictions. Copy the classifier.py program from http://bit.ly/2tMn8c8 and edit the following lines:
+
+```
 line 7 : replace the existing path with path to the folder with cropped images
 line 19: replace the existing path with path to labels.txt file generated during our we trained our inception model
 line 20 :  replace the existing path with path to .pb file generated during our we trained our inception model
+```
 Note : classifier.py program has been written assuming that number of cropped images are less than or equal to 10. Running the classifier on more images imposes heavy burden on the computer.
 When you run this program, predictions are made on the cropped images and the results are stored in a text file named output.txt . This file is created where the classify.py exists.
 This output.txt is the final output file with all the objects in our test image.
@@ -209,14 +214,15 @@ This output.txt is the final output file with all the objects in our test image.
 The flow of our program can be visualised as follows:
 
 
-Possible extensions and suggestions to the reader:
+##Possible extensions and suggestions to the reader:
  
 Although the above implemented programs produce results good enough for smart fridge, we suggest the reader to try the following approaches. These might produce better results than the above program.
  
 1. Darkflow :
 	When we searched for an implementation of darknet in tensor flow, we came across this interesting git repository. The author has implemented darknet using tensor flow and made it easy to train yolo. Instead of training tensor flow inception model and yolo separately, this model tries to achieve better detection results and tries to avoid classification part. Again this is possible only with a good dataset. Some of the additional features of this model include producing the output in json format which can be useful to integrate this model with other applications.
+```
 Github link : https://github.com/thtrieu/darkflow
- 
+ ```
 2. For implementing darknet in low weight devices like raspberry pi and mobiles , have a look at this repo : https://github.com/DT42/BerryNet
  
 3. As of now, training is only possible in gpu and cpu. Tensor Flow provides machine learning community with lightweight model of tensor flow like tf-slim. We did not have time to rewrite our code in tf-slim but we suggest the reader to  try this out.
@@ -228,7 +234,7 @@ Github link : https://github.com/thtrieu/darkflow
 6. Using Google vision for image detection. We won't talk much about it here but everything can be found in their official documentation. Be sure to check this out : https://cloud.google.com/vision/ . Note that google vision and IBM watson are paid services.
  
  
-Resources :
+##Resources :
  
 tensroflow slim version : https://github.com/tensorflow/tensorflow/tree/master/tensorflow/contrib/slim
  
@@ -245,9 +251,8 @@ tensorfow in android applications  https://medium.com/@daj/creating-an-image-cla
  
 yolo training : http://guanghan.info/blog/en/my-works/train-yolo/
 		  : https://timebutt.github.io/static/how-to-train-yolov2-to-detect-custom-objects/
-yolo training : community  support =  https://groups.google.com/forum/#!forum/darknet  
- 
-		  : https://github.com/AlexeyAB/darknet
+yolo training : community  support      :https://groups.google.com/forum/#!forum/darknet  
+ 					:https://github.com/AlexeyAB/darknet
 DATASETS: http://image-net.org/
 vegetables dataset : https://drive.google.com/drive/folders/0B-BWEF7_tH_WNVhqZ0ZjcmRzeGc
 Annotation tools  :  https://github.com/AlexeyAB/Yolo_mark
