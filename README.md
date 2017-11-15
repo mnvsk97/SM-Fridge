@@ -13,8 +13,8 @@ $ git clone https://github.com/mnvsk97/SM-fridge.git
 ```
 Image classifier has been written in python using tensor flow framework. Refer https://www.tensorflow.org/ for more details on tensorflow.To install tensor flow use the following commands:
 ```
-$ sudo pip uninstall tensorflow  # for Python 2.7
-$ sudo pip3 uninstall tensorflow # for Python 3.x
+$ sudo pip install tensorflow  # for Python 2.7
+$ sudo pip3 install tensorflow # for Python 3.x
  ``` 
 ```
 Note: We assume that pip is already installed. If the local machine has external gpu support, tensor flow can be installed for gpu using $ sudo pip install tensorflow-gpu. Advantages of using a gpu are discussed in the later sections. If messages like “____ has not been installed” popup in your terminal while running any kind of commands, please try to google them.
